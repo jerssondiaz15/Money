@@ -1,0 +1,19 @@
+
+@
+build.gradle.kts,d\b\dbcff70658daf80b53ce624f6adcaa529df5ed8d
+C
+settings.gradle.kts,7\4\749edfcc96398253e5b3416184e95c46621da850
+D
+app/build.gradle.kts,d\2\d2a4383452aad84a18429a5844d31330a012a9e6
+E
+data/build.gradle.kts,9\f\9f5470ef43fd1acab01d54a63bdece9a90dec1b7
+I
+gradle/libs.versions.toml,d\7\d7595319a0658be6f1ed500ad590d42e4b28bc4f
+G
+domain/build.gradle.kts,d\7\d72c8b69b8da0b3b02b699ccd509295dbd783baa
+h
+8app/src/main/java/com/jersson/diaz/money/MainActivity.kt,8\e\8efbaeedab335b9aed015b18756a8aed11c1a84c
+i
+9app/src/main/java/com/jersson/diaz/money/MoneyActivity.kt,4\7\471662c272381d8c15888784c08db8de1c17949b
+P
+ app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
