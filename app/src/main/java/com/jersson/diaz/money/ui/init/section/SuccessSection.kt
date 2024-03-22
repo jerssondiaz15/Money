@@ -26,7 +26,6 @@ import androidx.compose.ui.unit.dp
 import androidx.core.util.Function
 import com.jersson.diaz.domain.model.User
 import com.jersson.diaz.money.R
-import com.jersson.diaz.money.model.AccountState
 import com.jersson.diaz.money.theme.Blue
 import com.jersson.diaz.money.theme.Green
 import com.jersson.diaz.money.theme.GreenAndroid
@@ -87,7 +86,7 @@ fun SuccessSection(
     Button(
         modifier = Modifier.fillMaxWidth().height(50.dp),
         shape = RoundedCornerShape(4.dp),
-        //enabled = user != "" && password != "",
+        enabled = user != "" && password != "",
         onClick = {
             validateUser.apply(
                 User(

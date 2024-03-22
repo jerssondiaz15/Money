@@ -5,16 +5,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jersson.diaz.domain.model.Account
-import com.jersson.diaz.domain.model.Currency
-import com.jersson.diaz.domain.model.Transactions
 import com.jersson.diaz.domain.model.User
 import com.jersson.diaz.money.model.AccountState
 import com.jersson.diaz.money.model.MutableUiStateHolder
-import com.jersson.diaz.domain.model.TypeTransaction
+import com.jersson.diaz.domain.usecase.GetAccountListUseCase
 import com.jersson.diaz.money.model.UiState
 import com.jersson.diaz.money.navigation.UIEvents
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -30,7 +27,7 @@ private const val PASSWORD3 = "123456"
 
 @HiltViewModel
 class MoneyViewModel @Inject constructor(
-
+    private val getAccountListUseCase: GetAccountListUseCase,
 ): ViewModel() {
 
     private var _uiState = mutableStateOf(MutableUiStateHolder())
@@ -51,7 +48,6 @@ class MoneyViewModel @Inject constructor(
                 currentState = UiState.LOADING
             )
             delay(2000)
-            /*
             if (user.user == ADMIN && user.password == PASSWORD ||user.user == ADMIN2 && user.password == PASSWORD2 || user.user == ADMIN3 && user.password == PASSWORD3) {
                 _events.emit(UIEvents.GoAccounts)
                 getData()
@@ -60,65 +56,21 @@ class MoneyViewModel @Inject constructor(
                     currentState = UiState.ERROR
                 )
             }
-            */
-            getData()
-            _events.emit(UIEvents.GoAccounts)
         }
     }
 
     private fun getData(){
-        viewModelScope.launch(Dispatchers.IO)  {
+        viewModelScope.launch {
             _uiState.value = uiState.value.copy(
                 currentState = UiState.LOADING
             )
-            /*
-            val result = getListMoviesUseCase.invoke()
+            delay(2000)
+            val result = getAccountListUseCase.invoke()
             _state.value = state.value.copy(
-                listMovies = result
+                list = result
             )
             _uiState.value = uiState.value.copy(
-                currentState = UiState.from(result)
-            )
-            */
-            delay(2000)
-            _state.value = state.value.copy(
-                list = listOf(
-                    Account(
-                        currency = Currency.PEN,
-                        amount = 1000.80,
-                        numberAccount = "1111111111111",
-                        list = listOf(
-                            Transactions(
-                                description = "Transferencia",
-                                date = "25 Nov 2021",
-                                amount = 6.10,
-                                currency = Currency.PEN,
-                                typeTransaction = TypeTransaction.ADD,
-                            ),
-                            Transactions(
-                                description = "Plin",
-                                date = "25 Nov 2021",
-                                amount = 10.0,
-                                currency = Currency.PEN,
-                                typeTransaction = TypeTransaction.LESS,
-                            )
-                        )
-                    ),
-                    Account(
-                        currency = Currency.USD,
-                        amount = 1600.20,
-                        numberAccount = "222222222222",
-                        list = listOf(
-                            Transactions(
-                                description = "Transferencia",
-                                date = "25 Nov 2021",
-                                amount = 6.10,
-                                currency = Currency.PEN,
-                                typeTransaction = TypeTransaction.ADD,
-                            )
-                        )
-                    ),
-                )
+                currentState = UiState.from(state.value.list)
             )
             _uiState.value = uiState.value.copy(
                 currentState = UiState.from(state.value.list)
