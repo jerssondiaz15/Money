@@ -11,5 +11,10 @@ plugins {
 }
 
 tasks.register("clean", Delete::class) {
+    group = "root"
+    description = "solution"
     delete(rootProject.buildDir)
+    subprojects {
+        delete(rootProject.layout.buildDirectory)
+    }
 }
